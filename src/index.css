@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  scroll-behavior: smooth;
+}
+.spinner {
+    width: 40px;
+    height: 40px;
+  
+    position: relative;
+    margin: 100px auto;
+  }
+  
+  .double-bounce1, .double-bounce2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #b8a12d;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+  
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+  }
+  
+  .double-bounce2 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+  }
+  
+  @-webkit-keyframes sk-bounce {
+    0%, 100% { -webkit-transform: scale(0.0) }
+    50% { -webkit-transform: scale(1.0) }
+  }
+  
+  @keyframes sk-bounce {
+    0%, 100% {
+      transform: scale(0.0);
+      -webkit-transform: scale(0.0);
+    } 50% {
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+    }
+  }
+  
+  /* src/Pagination.jsx */
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  list-style: none;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  border: 1px solid #007bff;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.page-link:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+
+.bg-image {
+  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.75)), url("https://nypost.com/wp-content/uploads/sites/2/2024/04/al-shabaab-terrorist-migrant-border-crossing-california-minnesota-mayorkas-comp-02.jpg?quality=75&strip=all&w=1200");
+  background-size: cover;
+  background-position: center;
+}
+
+#error-page {
+
+  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.75)), url("https://images.unsplash.com/photo-1545972154-9bb223aac798?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3050&q=80&exp=8&con=-15&sat=-75");
+  background-size: cover;
+  background-position: center;
+
+}
+
+.scroll {
+  scrollbar-width: none;
+}
+
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+
