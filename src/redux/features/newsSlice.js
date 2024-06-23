@@ -5,11 +5,13 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://newsapi.org/v2/",
+    baseUrl: "https://news-portal-pied.vercel.app/https://newsapi.org/v2/",
+    method: "GET",
     prepareHeaders: (headers) => {
       headers.set("x-api-key", import.meta.env.VITE_NEWS_API_KEY)
-      return headers
-    }
+      return headers;
+    },
+    
 
   }),
   endpoints: (builder) => ({
