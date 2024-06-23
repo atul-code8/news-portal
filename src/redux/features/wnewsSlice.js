@@ -2,22 +2,28 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 const initialState = {
-  status: 'uninitialized',
   articles: [],
+  status: 'idel',
   error: null,
 }
+// const API_URL = "https://newsapi.org/v2/top-headlines?country=in&category=sports";
 
-export const fetchArticles = createAsyncThunk('todos/fetchTodos', async () => {
-  const res = await axios.get('https://api.worldnewsapi.com/search-news?source-countries=in&number=25', {
+const API_URL = 'https://api.worldnewsapi.com/search-news?q=sports&source-countries=in';
+
+
+export const fetchArticles = createAsyncThunk('news/fetchArticles', async () => {
+  const response = await axios.get(API_URL, {
     headers: {
       "x-api-key": import.meta.env.VITE_WNEWS_API_KEY
     }
   })
-  return res.data
+  // const data = await response.json();
+  return response.data; // Assuming 'articles' is the array of news articles
+  
 })
 
 export const wnewsSlice = createSlice({
-  name: 'articles',
+  name: 'news',
   initialState,
   reducers: {
     // any additional "normal" case reducers here.

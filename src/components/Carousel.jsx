@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGetCategoryQuery } from "../redux/features/newsSlice";
 import Spinner from "./Spinner";
 
-const Carousel = () => {
+const Carousel = ({data, dataStatus}) => {
   const {
     data: news,
     isLoading,
@@ -10,9 +10,10 @@ const Carousel = () => {
     isError,
     error,
   } = useGetCategoryQuery("general");
+
   const scrollRef = useRef(null);
 
-  if (isLoading) {
+  if (dataStatus === 'loading') {
     return <Spinner />;
   }
   if (isError) {
@@ -34,16 +35,16 @@ const Carousel = () => {
           className="flex flex-row w-max overflow-x-scroll scroll"
           ref={scrollRef}
         >
-          {isSuccess &&
-            news.articles.map(
+          {dataStatus === 'succeeded' &&
+            data.news.map(
               (data, index) =>
-                data.urlToImage && (
+                data.image  && (
                   <div
                     className="bg-black relative min-w-80 h-[447px] mr-8"
                     key={`gallery_image-${index + 1}`}
                   >
                     <img
-                      src={data.urlToImage}
+                      src={data.image}
                       alt="gallery"
                       className="w-full h-full object-cover opacity-100 transition hover:opacity-55 cursor-pointer"
                     />

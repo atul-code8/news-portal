@@ -14,13 +14,23 @@ export default function App() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.articles);
-  const dataStatus = useSelector((state) => state.articles.status);
-  const error = useSelector((state) => state.articles.error);
+  const data = useSelector((state) => state.news.articles);
+  const dataStatus = useSelector((state) => state.news.status);
+  const error = useSelector((state) => state.news.error);
 
   useEffect(() => {
-    console.log(dispatch(fetchArticles()));
+    if(dataStatus === 'idel') {
+      dispatch(fetchArticles());
+    }
   }, []);
+
+  if (dataStatus === 'loading') {
+    console.log("Loading...");
+  } else if (dataStatus === 'succeeded') {
+    const content = data;
+  } else if (data === 'failed') {
+    console.log(error);
+  }
 
   const apiKey = "849357abf6ef47b7882851cadc046486";
 
@@ -59,7 +69,7 @@ export default function App() {
       ) : (
         <NewsList articles={topNews} loading={loading} />
       )}
-      <Carousel />
+      <Carousel data={data} dataStatus={dataStatus}/>
       <Newesletter />
       <Features />
       <Footer />
