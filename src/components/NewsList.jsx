@@ -4,7 +4,7 @@ import Spinner from "./Spinner";
 import Pagination from "./Pagination";
 import Carousel from "./Carousel";
 
-const NewsList = ({ articles, loading }) => {
+const NewsList = ({ articles, dataStatus }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(3);
 
@@ -16,7 +16,7 @@ const NewsList = ({ articles, loading }) => {
       // Change page
       const paginate = pageNumber => setCurrentPage(pageNumber);
 
-  if(loading) {
+  if(dataStatus === 'loading') {
     return <Spinner />
   }
   return (

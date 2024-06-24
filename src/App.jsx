@@ -20,7 +20,7 @@ export default function App() {
 
   useEffect(() => {
     if(dataStatus === 'idel') {
-      dispatch(fetchArticles());
+      dispatch(fetchArticles);
     }
   }, []);
 
@@ -32,42 +32,14 @@ export default function App() {
     console.log(error);
   }
 
-  const apiKey = "849357abf6ef47b7882851cadc046486";
-
-  // useEffect(() => {
-  //   fetch(
-  //     "https://api.worldnewsapi.com/search-news?source-countries=in",
-  //     {
-  //       method: "GET",
-  //       headers: {
-  //         "x-api-key": apiKey,
-  //       },
-  //     }
-  //   )
-  //     .then((response) => {
-  //       setLoading(true);
-  //       if (!response.ok) {
-  //         throw new Error(`HTTP error! Status: ${response.status}`);
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       setArticles(data.news);
-  //       setLoading(false);
-  //     })
-  //     .catch((error) =>
-  //       console.error("There was a problem with the fetch operation:", error)
-  //     );
-  // }, []);
-
   return (
     <>
       <Navbar />
       <Catalogue />
       {articles.length !== 0 ? (
-        <NewsList articles={articles} loading={loading} />
+        <NewsList articles={articles} dataStatus={dataStatus} />
       ) : (
-        <NewsList articles={topNews} loading={loading} />
+        <NewsList articles={topNews} dataStatus={dataStatus} />
       )}
       <Carousel data={data} dataStatus={dataStatus}/>
       <Newesletter />
