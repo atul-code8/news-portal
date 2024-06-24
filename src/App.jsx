@@ -20,7 +20,7 @@ export default function App() {
 
   useEffect(() => {
     if(dataStatus === 'idel') {
-      dispatch(fetchArticles);
+      dispatch(fetchArticles());
     }
   }, []);
 
