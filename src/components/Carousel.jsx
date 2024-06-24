@@ -1,24 +1,30 @@
-import React, { useRef } from "react";
-import { useGetCategoryQuery } from "../redux/features/newsSlice";
+import React, { useRef, useEffect, } from "react";
 import Spinner from "./Spinner";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchArticles } from "../redux/features/wnewsSlice";
 
-const Carousel = ({data, dataStatus}) => {
-  const {
-    data: news,
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-  } = useGetCategoryQuery("general");
 
-  const scrollRef = useRef(null);
+const Carousel = () => {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.news.articles);
+  const dataStatus = useSelector((state) => state.news.status);
+  const error = useSelector((state) => state.news.error);
+
+  useEffect(() => {
+    if(dataStatus === 'idel') {
+      dispatch(fetchArticles());
+    }
+  }, []);
 
   if (dataStatus === 'loading') {
-    return <Spinner />;
+    return <Spinner />
+  } else if (dataStatus === 'succeeded') {
+    const content = data;
+  } else if (data === 'failed') {
+    console.log(error);
   }
-  if (isError) {
-    return error.message;
-  }
+  const scrollRef = useRef(null);
+
   const scroll = (direction) => {
     const { current } = scrollRef;
 
@@ -35,10 +41,10 @@ const Carousel = ({data, dataStatus}) => {
           className="flex flex-row w-max overflow-x-scroll scroll"
           ref={scrollRef}
         >
-          {dataStatus === 'succeeded' &&
+          {dataStatus === "succeeded" &&
             data.news.map(
               (data, index) =>
-                data.image  && (
+                data.image && (
                   <div
                     className="bg-black relative min-w-80 h-[447px] mr-8"
                     key={`gallery_image-${index + 1}`}

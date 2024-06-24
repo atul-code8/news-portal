@@ -9,6 +9,7 @@ import Features from "./components/Features";
 import Carousel from "./components/Carousel";
 import { fetchArticles } from "./redux/features/wnewsSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Spinner from "./components/Spinner";
 
 export default function App() {
   const [articles, setArticles] = useState([]);
@@ -25,7 +26,7 @@ export default function App() {
   }, []);
 
   if (dataStatus === 'loading') {
-    console.log("Loading...");
+    return <Spinner />
   } else if (dataStatus === 'succeeded') {
     const content = data;
   } else if (data === 'failed') {
@@ -41,7 +42,7 @@ export default function App() {
       ) : (
         <NewsList articles={topNews} dataStatus={dataStatus} />
       )}
-      <Carousel data={data} dataStatus={dataStatus}/>
+      <Carousel />
       <Newesletter />
       <Features />
       <Footer />
