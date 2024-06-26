@@ -1,54 +1,30 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
+// Need to use the React-specific entry point to import createApi
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const initialState = {
-  articles: [],
-  status: 'idel',
-  error: null,
-}
-// const API_URL = "https://newsapi.org/v2/top-headlines?country=in&category=sports";
+// Define a service using a base URL and expected endpoints
+export const newsSlice = createApi({
+  reducerPath: "wnewsApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://api.worldnewsapi.com/",
+    prepareHeaders: (headers) => {
+      headers.set("x-api-key", import.meta.env.VITE_WNEWS_API_KEY);
 
-const API_URL = 'https://api.worldnewsapi.com/search-news?q=sports&source-countries=in';
+    },
+  }),
+  endpoints: (builder) => ({
+    getNewsByName: builder.query({
+      query: (name) => `search-news?text=${name}&language=en&earliest-publish-date=2024-06-01`,
+    }),
+    getTopNews: builder.query({
+      query: (name) =>
+        `top-news?source-country=${name}&language=en`,
+    }),
+    getNewsById: builder.query({
+      query: (id) => `retrieve-news?ids=${id}`
+    })
+  }),
+});
 
+// Export hooks for usage in functional components, which are auto-generated based on the defined endpoints
+export const { useGetNewsByNameQuery, useGetTopNewsQuery, useGetNewsByIdQuery } = newsSlice;
 
-export const fetchArticles = createAsyncThunk('news/fetchArticles', async () => {
-  const response = await axios.get(API_URL, {
-    headers: {
-      "x-api-key": import.meta.env.VITE_WNEWS_API_KEY
-    }
-  })
-  // const data = await response.json();
-  return response.data; // Assuming 'articles' is the array of news articles
-  
-})
-
-export const wnewsSlice = createSlice({
-  name: 'news',
-  initialState,
-  reducers: {
-    // any additional "normal" case reducers here.
-    // these will generate new action creators
-  },
-  extraReducers: (builder) => {
-    // Use `extraReducers` to handle actions that were generated
-    // _outside_ of the slice, such as thunks or in other slices
-    builder
-      .addCase(fetchArticles.pending, (state, action) => {
-        state.status = 'loading'
-      })
-      // Pass the generated action creators to `.addCase()`
-      .addCase(fetchArticles.fulfilled, (state, action) => {
-        // Same "mutating" update syntax thanks to Immer
-        state.status = 'succeeded'
-        state.articles = action.payload
-      })
-      .addCase(fetchArticles.rejected, (state, action) => {
-        state.status = 'failed'
-        state.articles = []
-        state.error = action.error
-      })
-  },
-})
-
-
-export default wnewsSlice.reducer

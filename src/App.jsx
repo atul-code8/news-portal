@@ -1,48 +1,30 @@
-import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import NewsList from "./components/NewsList";
-import { topNews } from "./api";
 import Catalogue from "./components/Catalogue";
 import Footer from "./components/Footer";
 import Newesletter from "./components/Newsletter";
 import Features from "./components/Features";
-import Carousel from "./components/Carousel";
-import { fetchArticles } from "./redux/features/wnewsSlice";
-import { useDispatch, useSelector } from "react-redux";
 import Spinner from "./components/Spinner";
+import { useGetTopNewsQuery } from "./redux/features/wnewsSlice";
 
 export default function App() {
-  const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state.news.articles);
-  const dataStatus = useSelector((state) => state.news.status);
-  const error = useSelector((state) => state.news.error);
+  const { data, isLoading, isSuccess, error } = useGetTopNewsQuery("in");
 
-  useEffect(() => {
-    if(dataStatus === 'idel') {
-      dispatch(fetchArticles());
-    }
-  }, []);
+  if (isLoading) return <Spinner />;
 
-  if (dataStatus === 'loading') {
-    return <Spinner />
-  } else if (dataStatus === 'succeeded') {
-    const content = data;
-  } else if (data === 'failed') {
-    console.log(error);
-  }
+  if (error)
+    return (
+      <div className="h-screen grid place-items-center text-lg font-medium text-red-500">
+        {JSON.stringify(error.data)}
+      </div>
+    );
 
   return (
     <>
       <Navbar />
       <Catalogue />
-      {articles.length !== 0 ? (
-        <NewsList articles={articles} dataStatus={dataStatus} />
-      ) : (
-        <NewsList articles={topNews} dataStatus={dataStatus} />
-      )}
-      <Carousel />
+      <NewsList articles={data} loading={isLoading} error={error}/>
+      {/* <Carousel /> */}
       <Newesletter />
       <Features />
       <Footer />

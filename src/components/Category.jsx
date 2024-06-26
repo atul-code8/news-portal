@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useGetCategoryQuery } from "../redux/features/newsSlice";
 import { useParams } from "react-router-dom";
 import Spinner from "./Spinner";
 import Navbar from "./Navbar";
@@ -8,31 +7,26 @@ import Pagination from "./Pagination";
 import Newesletter from "./Newsletter";
 import Features from "./Features";
 import Footer from "./Footer";
-
+import { useGetNewsByNameQuery } from "../redux/features/wnewsSlice";
 
 const Category = () => {
-  const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(3);
 
-  const {
-    data: news,
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-  } = useGetCategoryQuery(category);
+  const { data, isLoading, isSuccess, isError, error, refetch } =
+    useGetNewsByNameQuery(category);
 
   const param = useParams();
   useEffect(() => {
     setCategory(param.category);
-  }, []);
+  }, [param.category]);
 
   // Get current items
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems =
-    isSuccess && news.articles.slice(indexOfFirstItem, indexOfLastItem);
+    isSuccess && data.news.slice(indexOfFirstItem, indexOfLastItem);
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -54,21 +48,16 @@ const Category = () => {
           </span>
           news
         </h2>
-        {category.length !== 0 && isSuccess ? (
+        {isSuccess ? (
           currentItems.map((article, index) => {
-            const dateString = article.publishedAt;
-            const dateObject = new Date(dateString);
-            const timestamp = dateObject.getTime();
             return (
               <div key={index}>
                 {article.urlToImage !== null && (
-                  <div
-                    className="mx-auto rounded-lg overflow-hidden shadow-lg w-[554px]"
-                  >
+                  <div className="mx-auto rounded-lg overflow-hidden shadow-lg w-[554px]">
                     <div>
-                      <Link to={`${timestamp}`}>
+                      <Link to={article.id}>
                         <img
-                          src={article.urlToImage}
+                          src={article.image}
                           alt={article.title}
                           className="w-full h-[313px] object-cover object-center hover:opacity-70 transition"
                         />
@@ -93,7 +82,7 @@ const Category = () => {
         )}
         <Pagination
           itemsPerPage={itemsPerPage}
-          totalItems={news.articles.length}
+          totalItems={data.news.length}
           paginate={paginate}
         />
       </div>
