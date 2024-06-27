@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 
 const NewsItem = ({ article }) => {
   return (
-    <div className="mx-auto rounded-lg overflow-hidden shadow-lg w-[554px]">
+    <div className="mx-auto rounded-lg overflow-hidden shadow-lg  sm:w-[554px] w-[280px]">
       <div className="border-b">
         <Link to={`/article/all/${article.id}`}>
         <img
           src={article.image}
           alt={article.title}
-          className="w-full h-[313px] object-cover object-center hover:opacity-70 transition"
+          className="w-full sm:h-[313px] h-[176px] object-cover object-center hover:opacity-70 transition"
         />
         </Link>
       </div>

@@ -6,25 +6,26 @@ import Newesletter from "./components/Newsletter";
 import Features from "./components/Features";
 import Spinner from "./components/Spinner";
 import { useGetTopNewsQuery } from "./redux/features/wnewsSlice";
+import { json } from "react-router-dom";
 
 export default function App() {
-  const { data, isLoading, isSuccess, error } = useGetTopNewsQuery("in");
+  const { data, isLoading, isError, error } = useGetTopNewsQuery("in");
 
   if (isLoading) return <Spinner />;
 
-  if (error)
+  if (isError) {
     return (
       <div className="h-screen grid place-items-center text-lg font-medium text-red-500">
-        {JSON.stringify(error.data)}
+        {error.error}
       </div>
     );
+  }
 
   return (
     <>
       <Navbar />
       <Catalogue />
-      <NewsList articles={data} loading={isLoading} error={error}/>
-      {/* <Carousel /> */}
+      <NewsList articles={data} loading={isLoading} error={error} />
       <Newesletter />
       <Features />
       <Footer />

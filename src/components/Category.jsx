@@ -14,7 +14,7 @@ const Category = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(3);
 
-  const { data, isLoading, isSuccess, isError, error, refetch } =
+  const { data, isLoading, isSuccess, error } =
     useGetNewsByNameQuery(category);
 
   const param = useParams();
@@ -25,15 +25,12 @@ const Category = () => {
   // Get current items
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems =
-    isSuccess && data.news.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = data?.news.slice(indexOfFirstItem, indexOfLastItem);
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  if (isLoading) {
-    return <Spinner />;
-  } else if (isError) {
+  if (error) {
     return <div>{error.toString()}</div>;
   }
 
@@ -55,7 +52,7 @@ const Category = () => {
                 {article.urlToImage !== null && (
                   <div className="mx-auto rounded-lg overflow-hidden shadow-lg w-[554px]">
                     <div>
-                      <Link to={article.id}>
+                      <Link to={`${article.id}`}>
                         <img
                           src={article.image}
                           alt={article.title}
@@ -78,11 +75,11 @@ const Category = () => {
             );
           })
         ) : (
-          <h1>Nothing articles found!</h1>
+          <Spinner />
         )}
         <Pagination
           itemsPerPage={itemsPerPage}
-          totalItems={data.news.length}
+          totalItems={data?.news.length}
           paginate={paginate}
         />
       </div>

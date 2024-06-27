@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-const Carousel = () => {
+const Carousel = ({articles}) => {
   const scrollRef = useRef(null);
 
   const scroll = (direction) => {
@@ -15,12 +15,12 @@ const Carousel = () => {
 
   return (
     <div className="flex flex-row py-4">
-      <div className="flex-1 flex flex-row max-w-[80%] mx-auto relative">
+      <div className="flex-1 flex flex-row max-w-[90%] mx-auto relative">
         <div
           className="flex flex-row w-max overflow-x-scroll scroll"
           ref={scrollRef}
         >
-          {data.news.map(
+          {articles?.top_news[1].news.map(
             (data, index) =>
               data.image && (
                 <div

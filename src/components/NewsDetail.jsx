@@ -11,13 +11,13 @@ const NewsDetail = () => {
 
   const param = useParams();
   useEffect(() => {
-    setName(param.category);
+    setName(param.id);
   }, [param.id]);
 
   if (isLoading) {
     return <Spinner />;
   } else if (isSuccess) {
-    console.log(data);
+    console.log('success');
   } else if (isError) {
     return <div>{error.toString()}</div>;
   }
@@ -27,18 +27,17 @@ const NewsDetail = () => {
       <div className="w-[750px] mx-auto p-8">
         <div className=" mb-4">
           <img
-            src={data.news.image}
-            alt={data.news.title}
+            src={data?.news[0].image}
+            alt={data?.news[0].title}
             className="w-full h-full object-cover object-center"
           />
         </div>
-        <h2 className="text-2xl font-semibold font-sans">{data.news.title}</h2>
-        <p className="font-medium my-2">{data.news.text}</p>
-        <p className="font-medium">Summary: {data.news.summary}</p>
+        <h2 className="text-2xl font-semibold font-sans">{data?.news[0].title}</h2>
+        <p className="font-medium my-2">{data?.news[0].text}</p>
         <p className="flex gap-x-2">
-          <GlobeAltIcon width={18} color="blue" /> {data.news.authors}
+          <GlobeAltIcon width={18} color="blue" /> {data?.news[0].authors}
         </p>
-        <em className="mt-1">source</em>
+        <em className="mt-1">{data?.news[0].publish_date}</em>
       </div>
     </>
   );
