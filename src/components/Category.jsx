@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useLazyGetNewsByNameQuery } from "../redux/features/wnewsSlice";
 import Spinner from "./Spinner";
 import Navbar from "./Navbar";
 import Pagination from "./Pagination";
 import Newesletter from "./Newsletter";
 import Features from "./Features";
 import Footer from "./Footer";
-import { useGetNewsByNameQuery } from "../redux/features/wnewsSlice";
 
 const Category = () => {
-  const [category, setCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(3);
-
-  const { data, isLoading, isSuccess, error } =
-    useGetNewsByNameQuery(category);
-
+  const [tirgger, { data, error }] = useLazyGetNewsByNameQuery();
   const param = useParams();
+
   useEffect(() => {
-    setCategory(param.category);
-  }, [param.category]);
+    setTimeout(() => {
+      tirgger(param.category);
+    }, 1000);
+  }, []);
 
   // Get current items
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -31,7 +30,11 @@ const Category = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (error) {
-    return <div>{error.toString()}</div>;
+    return (
+      <div className="h-screen grid place-items-center text-lg font-medium text-red-500">
+        {JSON.stringify(error.data)}
+      </div>
+    );
   }
 
   return (
@@ -45,7 +48,7 @@ const Category = () => {
           </span>
           news
         </h2>
-        {isSuccess ? (
+        {data ? (
           currentItems.map((article, index) => {
             return (
               <div key={index}>

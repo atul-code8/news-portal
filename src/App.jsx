@@ -6,7 +6,6 @@ import Newesletter from "./components/Newsletter";
 import Features from "./components/Features";
 import Spinner from "./components/Spinner";
 import { useGetTopNewsQuery } from "./redux/features/wnewsSlice";
-import { json } from "react-router-dom";
 
 export default function App() {
   const { data, isLoading, isError, error } = useGetTopNewsQuery("in");
@@ -16,7 +15,7 @@ export default function App() {
   if (isError) {
     return (
       <div className="h-screen grid place-items-center text-lg font-medium text-red-500">
-        {error.error}
+        {JSON.stringify(error.data)}
       </div>
     );
   }

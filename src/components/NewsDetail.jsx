@@ -5,8 +5,8 @@ import { useGetNewsByIdQuery } from "../redux/features/wnewsSlice";
 import Spinner from "./Spinner";
 
 const NewsDetail = () => {
-  const [name, setName] = useState([]);
-  const { data, isLoading, isSuccess, isError, error } =
+  const [name, setName] = useState('');
+  const { data, isLoading, isError, error } =
     useGetNewsByIdQuery(name);
 
   const param = useParams();
@@ -16,8 +16,6 @@ const NewsDetail = () => {
 
   if (isLoading) {
     return <Spinner />;
-  } else if (isSuccess) {
-    console.log('success');
   } else if (isError) {
     return <div>{error.toString()}</div>;
   }

@@ -24,14 +24,15 @@ const Carousel = ({articles}) => {
             (data, index) =>
               data.image && (
                 <div
-                  className="bg-black relative min-w-80 h-[447px] mr-8"
+                  className="bg-black relative min-w-80 h-[447px] mr-8 cursor-pointer"
                   key={`gallery_image-${index + 1}`}
                 >
                   <img
                     src={data.image}
                     alt="gallery"
-                    className="w-full h-full object-cover opacity-100 transition hover:opacity-55 cursor-pointer"
+                    className="w-full h-full absolute object-cover opacity-100 transition hover:opacity-55"
                   />
+                  <p className="w-full h-full text-white text-xl p-4 -z-100 hover:z-10">{data.title}</p>
                 </div>
               )
           )}
