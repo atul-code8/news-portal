@@ -20,11 +20,11 @@ const Carousel = ({articles}) => {
           className="flex flex-row w-max overflow-x-scroll scroll"
           ref={scrollRef}
         >
-          {articles?.top_news[1].news.map(
+          {articles?.top_news[3].news.map(
             (data, index) =>
               data.image && (
                 <div
-                  className="bg-black relative min-w-80 h-[447px] mr-8 cursor-pointer"
+                  className="bg-black relative min-w-80 h-[276px] sm:h-[447px] mr-8 cursor-pointer"
                   key={`gallery_image-${index + 1}`}
                 >
                   <img

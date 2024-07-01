@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Catalogue = () => {
   return (
-    <div className="sm:w-[600px] w-[400px] lg:w[1200px] mx-auto flex items-center space-x-8 mt-4 text-sm font-semibold">
+    <div className="sm:w-[600px] w-[90%] overflow-x-scroll py-4 lg:w[1200px] mx-auto flex items-center space-x-8 mt-4 text-sm font-semibold">
       <div>
         <Link
           to="/article/business"

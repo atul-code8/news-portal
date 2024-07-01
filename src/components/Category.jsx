@@ -40,7 +40,7 @@ const Category = () => {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto pt-4">
+      <div className="container pt-4">
         <h2 className="text-2xl font-semibold text-center mb-6">
           Latest{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 capitalize">

@@ -9,7 +9,7 @@ const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
   }
 
   return (
-    <nav>
+    <nav className='overflow-x-scroll w-1/2 mx-auto'>
       <ul className="pagination">
         {pageNumbers.map(number => (
           <li key={number} className="page-item">
