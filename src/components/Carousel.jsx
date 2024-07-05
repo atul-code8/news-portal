@@ -20,7 +20,7 @@ const Carousel = ({articles}) => {
           className="flex flex-row w-max overflow-x-scroll scroll"
           ref={scrollRef}
         >
-          {articles?.top_news[3].news.map(
+          {articles?.top_news[articles.top_news.length - 1].news.map(
             (data, index) =>
               data.image && (
                 <div

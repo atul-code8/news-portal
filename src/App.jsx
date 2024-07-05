@@ -8,7 +8,7 @@ import Spinner from "./components/Spinner";
 import { useGetTopNewsQuery } from "./redux/features/wnewsSlice";
 
 export default function App() {
-  const { data, isLoading, isError, error } = useGetTopNewsQuery("in");
+  const { data, isLoading, isError, error } = useGetTopNewsQuery("us");
 
   if (isLoading) return <Spinner />;
 

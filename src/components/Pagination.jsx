@@ -1,5 +1,5 @@
 // src/Pagination.jsx
-import React from 'react';
+import React from "react";
 
 const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
   const pageNumbers = [];
@@ -9,11 +9,17 @@ const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
   }
 
   return (
-    <nav className='overflow-x-scroll w-1/2 mx-auto'>
+    <nav className="overflow-x-scroll w-1/2 mx-auto">
       <ul className="pagination">
-        {pageNumbers.map(number => (
+        {pageNumbers.map((number) => (
           <li key={number} className="page-item">
-            <button onClick={() => paginate(number)} className="page-link">
+            <button
+              onClick={() => {
+                paginate(number);
+                window.scrollTo({top: 0});
+              }}
+              className="page-link active:bg-violet-500"
+            >
               {number}
             </button>
           </li>
