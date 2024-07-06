@@ -5,13 +5,21 @@ import {
   Dialog,
   DialogPanel,
   DialogTitle,
-  Input,
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-
+import { useNavigate } from "react-router-dom";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    event.preventDefault();
+    navigate(`article/${query}`)
+    setQuery("");
+
+  };
 
   return (
     <>
@@ -48,23 +56,36 @@ export default function Navbar() {
                         >
                           Search News
                         </DialogTitle>
-                        <div className="mt-2 relative flex items-center">
-                        <input class="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm" type="text" aria-label="Filter projects" placeholder="Filter articles..." />
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="size-6 absolute right-1 cursor-pointer"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                            />
-                          </svg>
-                        </div>
+                        <form
+                          className="mt-2 relative flex items-center"
+                          onSubmit={handleChange}
+                        >
+                          <input
+                            className="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm"
+                            type="text"
+                            aria-label="Filter projects"
+                            placeholder="Filter articles..."
+                            required
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                          />
+                          <button type="submit" className="absolute right-1 cursor-pointer">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className="size-6 "
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                              />
+                            </svg>
+                          </button>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -117,7 +138,6 @@ export default function Navbar() {
                       strokeWidth="1.5"
                       stroke="currentColor"
                       className="size-6"
-                     
                     >
                       <path
                         strokeLinecap="round"

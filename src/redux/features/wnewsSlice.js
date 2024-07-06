@@ -13,7 +13,7 @@ export const newsSlice = createApi({
   endpoints: (builder) => ({
     getNewsByName: builder.query({
       query: (name) =>
-        `search-news?text=${name}&language=en&earliest-publish-date=2024-06-01`,
+        `search-news?text=${name}&language=en`,
     }),
     getTopNews: builder.query({
       query: (name) => `top-news?source-country=${name}&language=en`,

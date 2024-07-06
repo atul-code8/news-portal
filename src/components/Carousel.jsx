@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 const Carousel = ({articles}) => {
   const scrollRef = useRef(null);
-
+  const length = articles?.top_news.length - 1;
   const scroll = (direction) => {
     const { current } = scrollRef;
 
@@ -20,7 +20,7 @@ const Carousel = ({articles}) => {
           className="flex flex-row w-max overflow-x-scroll scroll"
           ref={scrollRef}
         >
-          {articles?.top_news[articles.top_news.length - 1].news.map(
+          {articles?.top_news[length].news.map(
             (data, index) =>
               data.image && (
                 <div

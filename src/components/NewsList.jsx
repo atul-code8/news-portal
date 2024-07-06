@@ -35,7 +35,7 @@ const NewsList = ({ articles, loading, error }) => {
         <h2 className="text-xl font-semibold">Trending News</h2>
         <div className="grid grid-cols-1">
           <div className="w-[90%] h-[276px] mx-auto bg-image shadow-md overflow-hidden relative p-4 cursor-pointer mb-4">
-            <p className="text-lg text-gray-200 font-sans absolute bottom-2">
+            <p className="text-lg text-gray-200 absolute bottom-2">
               Twenty nine areas around Whitehouse Station, NJ, which was the
               epicenter of the quake, have since reported rumbles.
             </p>

@@ -7,7 +7,7 @@ const Catalogue = () => {
       <div>
         <Link
           to="/article/business"
-          className="text-gray-700 hover:border-b-2 border-green-700 active:text-blue-950 py-1"
+          className="text-gray-700 font-medium hover:border-b-2 border-green-700 active:text-blue-950 py-1"
         >
           Business
         </Link>
@@ -15,7 +15,7 @@ const Catalogue = () => {
       <div>
         <Link
           to="/article/entertainment"
-          className="text-gray-700 hover:border-b-2 border-green-700 active:text-blue-950 py-1"
+          className="text-gray-700 font-medium hover:border-b-2 border-green-700 active:text-blue-950 py-1"
         >
           Entertainment
         </Link>
@@ -23,7 +23,7 @@ const Catalogue = () => {
       <div>
         <Link
           to="/article/health"
-          className="text-gray-700 hover:border-b-2 border-green-700 active:text-blue-950 py-1"
+          className="text-gray-700 font-medium hover:border-b-2 border-green-700 active:text-blue-950 py-1"
         >
           Health
         </Link>
@@ -31,7 +31,7 @@ const Catalogue = () => {
       <div>
         <Link
           to="/article/science"
-          className="text-gray-700 hover:border-b-2 border-green-700 active:text-blue-950 py-1"
+          className="text-gray-700 font-medium hover:border-b-2 border-green-700 active:text-blue-950 py-1"
         >
           Science
         </Link>
@@ -39,7 +39,7 @@ const Catalogue = () => {
       <div>
         <Link
           to="/article/sports"
-          className="text-gray-700 hover:border-b-2 border-green-700 active:text-blue-950 py-1"
+          className="text-gray-700 font-medium hover:border-b-2 border-green-700 active:text-blue-950 py-1"
         >
           Sports
         </Link>
@@ -47,7 +47,7 @@ const Catalogue = () => {
       <div>
         <Link
           to="/article/technology"
-          className="text-gray-700 hover:border-b-2 border-green-700 active:text-blue-950 py-1"
+          className="text-gray-700 font-medium hover:border-b-2 border-green-700 active:text-blue-950 py-1"
         >
           Technology
         </Link>

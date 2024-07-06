@@ -22,16 +22,16 @@ const NewsDetail = () => {
 
   return (
     <>
-      <div className="w-[750px] mx-auto p-8">
-        <div className=" mb-4">
+      <div className="p-10">
+        <div className="mb-4">
           <img
             src={data?.news[0].image}
             alt={data?.news[0].title}
-            className="w-full h-full object-cover object-center"
+            className="w-2/3 mx-auto object-cover object-center"
           />
         </div>
         <h2 className="text-2xl font-semibold font-sans">{data?.news[0].title}</h2>
-        <p className="font-medium my-2">{data?.news[0].text}</p>
+        <p className="tracking-wider text-sm my-4">{data?.news[0].text}</p>
         <p className="flex gap-x-2">
           <GlobeAltIcon width={18} color="blue" /> {data?.news[0].authors}
         </p>

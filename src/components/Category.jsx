@@ -51,40 +51,41 @@ const Category = () => {
         {data ? (
           currentItems.map((article, index) => {
             return (
-              <div key={index}>
-                {article.urlToImage !== null && (
-                  <div className="mx-auto rounded-lg overflow-hidden shadow-lg w-[554px]">
-                    <div>
-                      <Link to={`${article.id}`}>
-                        <img
-                          src={article.image}
-                          alt={article.title}
-                          className="w-full h-[313px] object-cover object-center hover:opacity-70 transition"
-                        />
-                      </Link>
+              <>
+                <div key={index}>
+                  {article.urlToImage !== null && (
+                    <div className="mx-auto rounded-lg overflow-hidden shadow-lg w-[554px]">
+                      <div>
+                        <Link to={`${article.id}`}>
+                          <img
+                            src={article.image}
+                            alt={article.title}
+                            className="w-full h-[313px] object-cover object-center hover:opacity-70 transition"
+                          />
+                        </Link>
+                      </div>
+                      <div className="p-4">
+                        <p className="text-wrap font-medium mb-2">
+                          {article.title}
+                        </p>
+                      </div>
                     </div>
-                    <div className="p-4">
-                      <p className="text-wrap mb-2">{article.title}</p>
-                      <img
-                        className="inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                        src="https://static.vecteezy.com/system/resources/previews/036/280/650/large_2x/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-illustration-vector.jpg"
-                        alt="avtar"
-                      />
-                      <em className="font-medium ml-2">{article.author}</em>
-                    </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
+              </>
             );
           })
         ) : (
           <Spinner />
         )}
+        <div className="w-[554px] mx-auto">
+
         <Pagination
           itemsPerPage={itemsPerPage}
           totalItems={data?.news.length}
           paginate={paginate}
         />
+        </div>
       </div>
       <Newesletter />
       <Features />
